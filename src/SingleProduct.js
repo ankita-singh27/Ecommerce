@@ -23,7 +23,6 @@ const SingleProduct = () => {
     price,
     numVotes,
     description,
-    category,
     rating,
     image,
   } = singleProduct;

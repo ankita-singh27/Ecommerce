@@ -63,7 +63,14 @@ const Wrapper = styled.section`
     text-align: center;
     border-radius: 2rem;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+    transition: transform 0.3s ease-in-out;
+    
+    &:hover {
+    transform: scale(1.1);
+    filter: brightness(50%);
   }
+  }
+  
 
   .services-2 {
     gap: 4rem;

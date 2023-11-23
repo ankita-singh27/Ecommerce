@@ -61,6 +61,11 @@ const Wrapper = styled.section`
   img {
     min-width: 10rem;
     height: 10rem;
+    transition: transform 0.3s ease-in-out;
+  }
+  img:hover {
+    transform: scale(1.1);
+    filter: brightness(50%);
   }
 
   .brand-section-slider {
