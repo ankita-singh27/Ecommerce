@@ -3,6 +3,8 @@ import Services from "./components/Services";
 import Trusted from "./components/Trusted";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import TopProducts from "./components/TopProducts";
+import Category from "./components/Category";
 
 const Home = () => {
   const responsive = {
@@ -28,8 +30,9 @@ const Home = () => {
       <img src="./images/banner2.jpg" alt="banner-image" style={{width:"100%",height:"50rem"}}/>
       <img src="./images/banner3.png" alt="banner-image" style={{width:"100%" ,height:"50rem"}}/>
       </Carousel>
-
+      <Category/>
       <FeatureProduct />
+      <TopProducts/>
       <Services />
       <Trusted />
     </>

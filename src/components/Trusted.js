@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 const Trusted = () => {
+  
   return (
     <Wrapper className="brand-section">
       <div className="container">
         <h3>Trusted By 1000+ Companies</h3>
         <div className="brand-section-slider">
+       
           {/* my 1st img  */}
           <div className="slide">
             <img
