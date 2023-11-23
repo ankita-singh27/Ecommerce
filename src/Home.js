@@ -28,6 +28,7 @@ const Home = () => {
       <img src="./images/banner2.jpg" alt="banner-image" style={{width:"100%",height:"50rem"}}/>
       <img src="./images/banner3.png" alt="banner-image" style={{width:"100%" ,height:"50rem"}}/>
       </Carousel>
+
       <FeatureProduct />
       <Services />
       <Trusted />

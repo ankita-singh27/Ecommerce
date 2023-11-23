@@ -3,15 +3,13 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useProductContext } from "./context/productcontext";
 import PageNavigation from "./components/PageNavigation";
-import MyImage from "./components/MyImage";
 import { Container } from "./styles/Container";
-import FormatPrice from "./Helpers/FormatPrice";
 import { MdSecurity } from "react-icons/md";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import Star from "./components/Star";
 import AddToCart from "./components/AddToCart";
 
-const API = "https://api.pujakaitem.com/api/products";
+const API = "https://productdecisiveduck.onrender.com/products";
 
 const SingleProduct = () => {
   const { getSingleProduct, isSingleLoading, singleProduct } =
@@ -21,19 +19,17 @@ const SingleProduct = () => {
 
   const {
     id: alias,
-    name,
-    company,
+    title,
     price,
+    numVotes,
     description,
     category,
-    stock,
-    stars,
-    reviews,
+    rating,
     image,
   } = singleProduct;
 
   useEffect(() => {
-    getSingleProduct(`${API}?id=${id}`);
+    getSingleProduct(`${API}/${id}`);
   }, []);
 
   if (isSingleLoading) {
@@ -42,27 +38,26 @@ const SingleProduct = () => {
 
   return (
     <Wrapper>
-      <PageNavigation title={name} />
+     
+      <PageNavigation title={title} />
       <Container className="container">
         <div className="grid grid-two-column">
           {/* product Images  */}
           <div className="product_images">
-            <MyImage imgs={image} />
+            <img src={image} alt={title}/>
           </div>
 
           {/* product dAta  */}
           <div className="product-data">
-            <h2>{name}</h2>
-            <Star stars={stars} reviews={reviews} />
+            <h2>{title}</h2>
+            <Star rating={rating} reviews={numVotes} />
 
             <p className="product-data-price">
               MRP:
-              <del>
-                <FormatPrice price={price + 250000} />
-              </del>
+              <del> {price + 250}</del> 
             </p>
             <p className="product-data-price product-data-real-price">
-              Deal of the Day: <FormatPrice price={price} />
+              Deal of the Day: {price}
             </p>
             <p>{description}</p>
             <div className="product-data-warranty">
@@ -90,15 +85,15 @@ const SingleProduct = () => {
             <div className="product-data-info">
               <p>
                 Available:
-                <span> {stock > 0 ? "In Stock" : "Not Available"}</span>
+                <span> {numVotes> 100 ? "In Stock" : "Not Available"}</span>
               </p>
           
               <p>
-                Brand :<span> {company} </span>
+                no of votes :<span> {numVotes} </span>
               </p>
             </div>
             <hr />
-            {stock > 0 && <AddToCart product={singleProduct} />}
+             <AddToCart product={singleProduct} />
           </div>
         </div>
       </Container>
@@ -111,9 +106,9 @@ const Wrapper = styled.section`
     padding: 9rem 0;
   }
 
-  .product_images {
-    display: flex;
-    align-items: center;
+  .product_images img{
+    height:100%;
+    width:100%;
   }
 
   .product-data {
@@ -174,11 +169,7 @@ const Wrapper = styled.section`
     }
   }
 
-  .product-images {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  
 
   
   @media (max-width: ${({ theme }) => theme.media.mobile}) {

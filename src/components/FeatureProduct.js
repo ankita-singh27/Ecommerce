@@ -59,6 +59,7 @@ const Wrapper = styled.section`
     }
     img {
       max-width: 90%;
+      width:80%;
       margin-top: 1.5rem;
       height: 20rem;
       transition: all 0.2s linear;
