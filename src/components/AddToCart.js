@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { Button } from "../styles/Button";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { useCartContext } from "../context/cart_context";
 
 
 const AddToCart = ({ product }) => {
-  
+  const { addToCart } = useCartContext();
   const [amount, setAmount] = useState(1);
  
 
@@ -33,7 +34,7 @@ const AddToCart = ({ product }) => {
       </div>
     </div>
      
-      <NavLink to="/cart">
+      <NavLink to="/cart" onClick={()=>addToCart(amount,product)}>
         <Button className="btn">Add To Cart</Button>
       </NavLink>
     </Wrapper>
