@@ -8,7 +8,6 @@ const Header = () => {
     <MainHeader>
       <NavLink to="/">
         <img src="./images/logo.png" alt=" logo" className="logo"/>
-      <span className="header-section">SHOPPER</span>
       </NavLink>
       <Nav />
       
@@ -29,13 +28,7 @@ const MainHeader = styled.header`
     height: 5rem;
   }
 
- .header-section{
-   color:rgb(98 84 243);
-   font-size:2rem;
-   font-weight:bold;
-   position: absolute;
-   top: 4.7rem;
- }
+ 
   
 `;
 export default Header;

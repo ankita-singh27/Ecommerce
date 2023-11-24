@@ -67,17 +67,26 @@ const Nav = () => {
         top: -20%;
         left: 70%;
         background-color: ${({ theme }) => theme.colors.helper};
+        
       }
-    }
-
-    .user-login--name {
-      text-transform: capitalize;
-    }
-
-    .user-logout,
-    .user-login {
-      font-size: 1.4rem;
-      padding: 0.8rem 1.4rem;
+      .bounce {
+        animation: bounceIn 2s infinite 2s;
+      }
+      @keyframes bounceIn {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-13px);
+        }
+        60% {
+          transform: translateY(-15px);
+        }
+      }
     }
 
     @media (max-width: ${({ theme }) => theme.media.mobile}) {
@@ -152,8 +161,6 @@ const Nav = () => {
           font-size: 2rem;
         }
       }
-
-      
     }
   `;
 
@@ -165,7 +172,8 @@ const Nav = () => {
             <NavLink
               to="/"
               className="navbar-link "
-              onClick={() => setMenuIcon(false)}>
+              onClick={() => setMenuIcon(false)}
+            >
               Home
             </NavLink>
           </li>
@@ -173,7 +181,8 @@ const Nav = () => {
             <NavLink
               to="/about"
               className="navbar-link "
-              onClick={() => setMenuIcon(false)}>
+              onClick={() => setMenuIcon(false)}
+            >
               About
             </NavLink>
           </li>
@@ -181,7 +190,8 @@ const Nav = () => {
             <NavLink
               to="/products"
               className="navbar-link "
-              onClick={() => setMenuIcon(false)}>
+              onClick={() => setMenuIcon(false)}
+            >
               Products
             </NavLink>
           </li>
@@ -189,14 +199,15 @@ const Nav = () => {
             <NavLink
               to="/contact"
               className="navbar-link "
-              onClick={() => setMenuIcon(false)}>
+              onClick={() => setMenuIcon(false)}
+            >
               Contact
             </NavLink>
           </li>
           <li>
             <NavLink to="/cart" className="navbar-link cart-trolley--link">
               <FiShoppingCart className="cart-trolley" />
-              <span className="cart-total--item"> 0 </span>
+              <span className="cart-total--item bounce"> 0 </span>
             </NavLink>
           </li>
         </ul>

@@ -1,9 +1,27 @@
 import styled from "styled-components";
 import { useCartContext } from "./context/cart_context";
 import CartItem from "./components/CartItem";
+import { NavLink } from "react-router-dom";
+import { Button } from "./styles/Button";
+
+
 
 const Cart = () => {
-  const { cart } = useCartContext();
+  const { cart,clearCart } = useCartContext();
+
+  if (cart.length === 0) {
+    return (
+      <Wrapper>
+      <div className="empty-cart">
+        <img src="./images/trolley.png" alt="trolley"className="bounce trolley-cart" />
+        <h3>Your Cart Is Empty </h3>
+        <NavLink to="/products">
+        <Button>Shop Now</Button>
+        </NavLink>
+      </div>
+      </Wrapper>
+    );
+  }
 
   return (
     <Wrapper>
@@ -24,14 +42,41 @@ const Cart = () => {
           })}
         </div>
         <hr/>
+
+        {/* clear button and continue button */}
+        <div className="cart-two-button">
+          <NavLink to="/products">
+            <Button> continue Shopping </Button>
+          </NavLink>
+          <Button className="btn btn-clear" onClick={clearCart}>
+            clear cart
+          </Button>
+        </div>
       </div>
     </Wrapper>
   );
 };
 
+
 const Wrapper = styled.section`
   padding: 9rem 0;
 
+  .empty-cart{
+  display: grid;
+  place-items: center;
+  height: 50vh;
+  }
+
+  h3 {
+    font-size: 4.2rem;
+    text-transform: capitalize;
+    font-weight: 300;
+  }
+
+.trolley-cart{
+  height: 25rem;
+  width: 30rem;
+}
   .grid-five-column {
     grid-template-columns: repeat(4, 1fr) 0.3fr;
     text-align: center;
@@ -80,6 +125,36 @@ const Wrapper = styled.section`
     color: #e74c3c;
     cursor: pointer;
   }
+
+  ${'' /* clear and continue button.cart-two-button { */}
+  .cart-two-button{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+
+    .btn-clear {
+      background-color: #e74c3c;
+    }
+  }
+  .bounce{
+    animation: bounceIn 2s infinite 2s;
+      }
+      @keyframes bounceIn {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        40% {
+          transform: translateY(-30px);
+        }
+        60% {
+          transform: translateY(-15px);
+        }
+      }
 
     `;
 export default Cart;
