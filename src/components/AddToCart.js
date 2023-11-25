@@ -2,14 +2,14 @@ import { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { Button } from "../styles/Button";
-import { FaMinus, FaPlus } from "react-icons/fa";
 import { useCartContext } from "../context/cart_context";
+import CartAmountToggle from "./CartAmountToggle";
 
 
 const AddToCart = ({ product }) => {
-  const { addToCart } = useCartContext();
+  
   const [amount, setAmount] = useState(1);
- 
+  const { addToCart } = useCartContext();
 
   const setDecrease = () => {
     amount > 1 ? setAmount(amount - 1) : setAmount(1);
@@ -22,21 +22,17 @@ const AddToCart = ({ product }) => {
 
   return (
     <Wrapper>
-    <div className="cart-button">
-      <div className="amount-toggle">
-        <button onClick={()=>setDecrease()}>
-          <FaMinus />
-        </button>
-        <div className="amount-style">{amount}</div>
-        <button onClick={()=>setIncrease()}>
-          <FaPlus />
-        </button>
-      </div>
-    </div>
-     
+
+       <CartAmountToggle
+        amount={amount}
+        setDecrease={setDecrease}
+        setIncrease={setIncrease}
+        />
+    
       <NavLink to="/cart" onClick={()=>addToCart(amount,product)}>
         <Button className="btn">Add To Cart</Button>
       </NavLink>
+      
     </Wrapper>
   );
 };

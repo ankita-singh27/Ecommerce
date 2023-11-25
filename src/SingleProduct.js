@@ -8,12 +8,14 @@ import { MdSecurity } from "react-icons/md";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import Star from "./components/Star";
 import AddToCart from "./components/AddToCart";
+import Spinner from "./components/Spinner";
 
 const API = "https://productdecisiveduck.onrender.com/products";
 
 const SingleProduct = () => {
   const { getSingleProduct, isSingleLoading, singleProduct } =
     useProductContext();
+   
 
   const { id } = useParams();
 
@@ -32,7 +34,7 @@ const SingleProduct = () => {
   }, []);
 
   if (isSingleLoading) {
-    return <div  style={{color:"blue", fontSize:"5rem",textAlign:"center",marginTop:"5rem"}}>Loading.....</div>;
+    return <Spinner/>
   }
 
   return (
@@ -94,6 +96,7 @@ const SingleProduct = () => {
             <hr />
              <AddToCart product={singleProduct} />
           </div>
+         
         </div>
       </Container>
     </Wrapper>

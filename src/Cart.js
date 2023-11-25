@@ -7,14 +7,17 @@ import { Button } from "./styles/Button";
 
 
 const Cart = () => {
-  const { cart,clearCart } = useCartContext();
+  const { cart,clearCart,shipping_fee, total_price,total_item } = useCartContext();
 
   if (cart.length === 0) {
     return (
       <Wrapper>
-      <div className="empty-cart">
-        <img src="./images/trolley.png" alt="trolley"className="bounce trolley-cart" />
-        <h3>Your Cart Is Empty </h3>
+      <div className="empty-cart ">
+      <div className="bounce"> 
+      <img src="./images/trolley.png" alt="trolley"className=" trolley-cart" />
+      </div>
+       
+        <h3>Your Cart is Empty </h3>
         <NavLink to="/products">
         <Button>Shop Now</Button>
         </NavLink>
@@ -52,6 +55,35 @@ const Cart = () => {
             clear cart
           </Button>
         </div>
+
+        {/* order total_amount */}
+        <div className="order-total--amount">
+        <div><p className="summary"> Order Summary</p></div>
+          <div className="order-total--subdata">
+         
+            <div>
+              <p>Total Amount:</p>
+              <p> {(total_price).toFixed(2)} </p>
+            </div>
+
+            <div>
+              <p>Quantity:</p>
+              <p> {total_item} </p>
+            </div>
+            
+            
+            <div>
+              <p>shipping fee:</p>
+              <p> {shipping_fee} </p>
+            </div>
+            <hr />
+
+            <div>
+              <p>order total:</p>
+              <p> {(shipping_fee + total_price).toFixed(2)} </p>
+            </div>
+          </div>
+        </div>
       </div>
     </Wrapper>
   );
@@ -69,13 +101,16 @@ const Wrapper = styled.section`
 
   h3 {
     font-size: 4.2rem;
-    text-transform: capitalize;
     font-weight: 300;
   }
-
+  .bounce {
+        animation: bounceIn 2s infinite 2s;
+      }
+      
 .trolley-cart{
   height: 25rem;
   width: 30rem;
+
 }
   .grid-five-column {
     grid-template-columns: repeat(4, 1fr) 0.3fr;
@@ -89,6 +124,7 @@ const Wrapper = styled.section`
   hr {
     margin-top: 1rem;
   }
+  
   .cart-item {
     padding: 3.2rem 0;
     display: flex;
@@ -119,6 +155,26 @@ const Wrapper = styled.section`
       color: transparent;
     } 
   }
+
+  .amount-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.4rem;
+    font-size: 1.4rem;
+
+    button {
+      border: none;
+      background-color: #fff;
+      cursor: pointer;
+    }
+
+    .amount-style {
+      font-size: 2.4rem;
+      color: ${({ theme }) => theme.colors.btn};
+    }
+  }
+
   
   .remove_icon {
     font-size: 1.6rem;
@@ -136,25 +192,44 @@ const Wrapper = styled.section`
       background-color: #e74c3c;
     }
   }
-  .bounce{
-    animation: bounceIn 2s infinite 2s;
-      }
-      @keyframes bounceIn {
-        0%,
-        20%,
-        50%,
-        80%,
-        100% {
-          transform: translateY(0);
-          opacity: 1;
-        }
-        40% {
-          transform: translateY(-30px);
-        }
-        60% {
-          transform: translateY(-15px);
-        }
-      }
 
+  {/* order total_amount */}
+  .order-total--amount {
+    width: 100%;
+    margin: 4.8rem 0;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    .order-total--subdata {
+      border: 0.1rem solid #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      padding: 3.2rem;
+    }
+    .summary{
+  margin-right:5rem;
+  font-size:2rem;
+  }
+    div {
+      display: flex;
+      gap: 3.2rem;
+      justify-content: space-between;
+    }
+
+    div:last-child {
+      background-color: #fafafa;
+    }
+
+    div p:last-child {
+      font-weight: bold;
+      color: ${({ theme }) => theme.colors.heading};
+    }
+  }
+  
+  
     `;
 export default Cart;

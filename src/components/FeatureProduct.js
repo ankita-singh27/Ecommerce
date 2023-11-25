@@ -1,12 +1,13 @@
 import { useProductContext } from "../context/productcontext";
 import styled from "styled-components";
 import Product from "./Product";
+import Spinner from "./Spinner";
 
 const FeatureProduct = () => {
   const { isLoading, featureProducts } = useProductContext();
 
   if (isLoading) {
-    return <div style={{color:"blue", fontSize:"5rem",textAlign:"center",marginTop:"5rem"}}> Loading.... </div>;
+    return  <Spinner/>;
   }
 
   return (

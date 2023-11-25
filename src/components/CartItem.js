@@ -2,17 +2,11 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 import { useCartContext } from "../context/cart_context";
+import CartAmountToggle from "./CartAmountToggle";
 
 const CartItem = ({ id, title, image, price, amount }) => {
-  const { removeItem } = useCartContext();
+  const { removeItem,setDecrease,setIncrease } = useCartContext();
 
-//   const setDecrease = () => {
-//     // amount > 1 ? setAmount(amount - 1) : setAmount(1);
-//   };
-
-//   const setIncrease = () => {
-//     // amount < stock ? setAmount(amount + 1) : setAmount(stock);
-//   };
 
   return (
     <div className="cart_heading grid grid-five-column">
@@ -30,12 +24,16 @@ const CartItem = ({ id, title, image, price, amount }) => {
       </div>
 
       {/* Quantity  */}
-      {amount}
+      <CartAmountToggle
+        amount={amount}
+        setDecrease={()=>setDecrease(id)}
+        setIncrease={()=>setIncrease(id)}
+        />
      
 
       {/* //Subtotal */}
       <div className="cart-hide">
-        <p>{Math.round(price * amount)}</p>
+         <p>{(price*amount).toFixed(2)}</p> 
       </div>
 
       <div>
