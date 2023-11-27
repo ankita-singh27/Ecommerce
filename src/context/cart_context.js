@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer ,useEffect} from "react";
 import reducer from "../reducer/cartReducer";
-
+import { toast } from 'react-toastify';
 const CartContext = createContext();
 
 const getLocalCartData = () => {
@@ -25,10 +25,12 @@ const CartProvider = ({ children }) => {
 
   const addToCart = ( amount, product) => {
     dispatch({ type: "ADD_TO_CART", payload: { amount, product } });
+    toast.success("Added To Cart");
   };
 
   const removeItem = (id) => {
     dispatch({ type: "REMOVE_ITEM", payload: id });
+    toast.warning("Removed From Cart");
   };
 
   // to clear the cart

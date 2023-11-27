@@ -13,7 +13,7 @@ import Spinner from "./components/Spinner";
 const API = "https://productdecisiveduck.onrender.com/products";
 
 const SingleProduct = () => {
-  const { getSingleProduct, isSingleLoading, singleProduct } =
+  const { getSingleProduct, isLoading, singleProduct } =
     useProductContext();
    
 
@@ -33,7 +33,7 @@ const SingleProduct = () => {
     getSingleProduct(`${API}/${id}`);
   }, []);
 
-  if (isSingleLoading) {
+  if (isLoading) {
     return <Spinner/>
   }
 

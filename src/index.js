@@ -3,17 +3,34 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { AppProvider } from "./context/productcontext";
 import { CartProvider } from "./context/cart_context";
+import { Auth0Provider } from '@auth0/auth0-react';
+//import { useAuth0 } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+const domain=process.env.REACT_APP_AUTH_DOMAIN;
+const clientId=process.env.REACT_APP_CLIENT_ID;
 root.render(
+  <Auth0Provider
+    domain={domain}
+    clientId={clientId}
+    //redirectUri={window.location.origin}
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+  
+  >
   <AppProvider>
     <CartProvider>
         <App />
+        <ToastContainer/>
       </CartProvider>
   </AppProvider>
+  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

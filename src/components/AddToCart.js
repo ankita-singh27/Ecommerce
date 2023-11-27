@@ -7,9 +7,8 @@ import CartAmountToggle from "./CartAmountToggle";
 
 
 const AddToCart = ({ product }) => {
-  
   const [amount, setAmount] = useState(1);
-  const { addToCart } = useCartContext();
+  const { addToCart} = useCartContext();
 
   const setDecrease = () => {
     amount > 1 ? setAmount(amount - 1) : setAmount(1);
@@ -29,8 +28,8 @@ const AddToCart = ({ product }) => {
         setIncrease={setIncrease}
         />
     
-      <NavLink to="/cart" onClick={()=>addToCart(amount,product)}>
-        <Button className="btn">Add To Cart</Button>
+      <NavLink to="/cart">
+        <Button className="btn" onClick={()=>addToCart(amount,product)}>Add To Cart</Button>
       </NavLink>
       
     </Wrapper>

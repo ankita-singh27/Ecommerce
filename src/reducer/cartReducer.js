@@ -1,5 +1,6 @@
 const cartReducer = (state, action) => {
-  if (action.type === "ADD_TO_CART") {
+  switch (action.type) {
+   case "ADD_TO_CART":
     let { amount, product } = action.payload;
 
     let cartProduct;
@@ -16,9 +17,9 @@ const cartReducer = (state, action) => {
       ...state,
       cart: [...state.cart, cartProduct],
     };
-  }
+  
 
-  if (action.type === "REMOVE_ITEM") {
+   case "REMOVE_ITEM":
     let updatedCart = state.cart.filter(
       (curItem) => curItem.id !== action.payload
     );
@@ -26,17 +27,17 @@ const cartReducer = (state, action) => {
       ...state,
       cart: updatedCart,
     };
-  }
+  
 
-  if (action.type === "CLEAR_CART") {
+  case "CLEAR_CART":
     return {
       ...state,
       cart: [],
     };
-  }
+  
 
   // to set the increment and decrement
-  if (action.type === "SET_DECREMENT") {
+  case "SET_DECREMENT":
     let updatedProduct = state.cart.map((curElem) => {
       if (curElem.id === action.payload) {
         console.log(curElem)
@@ -55,10 +56,10 @@ const cartReducer = (state, action) => {
       }
     });
     return { ...state, cart: updatedProduct };
-  }
+  
 
-  if (action.type === "SET_INCREMENT") {
-    let updatedProduct = state.cart.map((curElem) => {
+  case "SET_INCREMENT":
+    let updateProduct = state.cart.map((curElem) => {
       if (curElem.id === action.payload) {
         let incAmount = curElem.amount + 1;
 
@@ -74,11 +75,11 @@ const cartReducer = (state, action) => {
         return curElem;
       }
     });
-    return { ...state, cart: updatedProduct };
-  }
+    return { ...state, cart: updateProduct };
+  
 
 
-  if (action.type === "CART_TOTAL_ITEM") {
+  case "CART_TOTAL_ITEM":
     let updatedItemVal = state.cart.reduce((initialVal, curElem) => {
       let { amount } = curElem;
 
@@ -90,9 +91,9 @@ const cartReducer = (state, action) => {
       ...state,
       total_item: updatedItemVal,
     };
-  }
+  
 
-  if (action.type === "CART_TOTAL_PRICE") {
+  case "CART_TOTAL_PRICE":
     let total_price = state.cart.reduce((initialVal, curElem) => {
       let { price, amount } = curElem;
       
@@ -104,9 +105,11 @@ const cartReducer = (state, action) => {
       ...state,
       total_price,
     };
-  }
-
+  
+  default:
   return state;
-};
+}
+}
+
 
 export default cartReducer;

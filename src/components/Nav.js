@@ -4,11 +4,14 @@ import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 import { useCartContext } from "../context/cart_context";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Button } from "../styles/Button";
 
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
   const { total_item } = useCartContext();
-
+  const { loginWithRedirect, user, logout, isAuthenticated } = useAuth0();
+console.log("nav",user)
   const Nav = styled.nav`
     .navbar-lists {
       display: flex;
@@ -69,7 +72,15 @@ const Nav = () => {
         top: -20%;
         left: 70%;
         background-color: ${({ theme }) => theme.colors.helper};
-        
+      }
+      .user-login--name {
+        text-transform: capitalize;
+      }
+
+      .user-logout,
+      .user-login {
+        font-size: 1.4rem;
+        padding: 0.8rem 1.4rem;
       }
       .bounce {
         animation: bounceIn 2s infinite 2s;
@@ -206,6 +217,21 @@ const Nav = () => {
               Contact
             </NavLink>
           </li>
+          {isAuthenticated && <p> user.name </p>}
+
+          {isAuthenticated ? (
+            <li>
+              <Button
+                onClick={() =>logout({ logoutParams: { returnTo: window.location.origin } })}>
+                Log Out
+              </Button>
+            </li>
+          ) : (
+            <li>
+              <Button onClick={() => loginWithRedirect()}>Log In</Button>;
+            </li>
+          )}
+
           <li>
             <NavLink to="/cart" className="navbar-link cart-trolley--link">
               <FiShoppingCart className="cart-trolley" />

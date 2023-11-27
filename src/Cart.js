@@ -3,12 +3,13 @@ import { useCartContext } from "./context/cart_context";
 import CartItem from "./components/CartItem";
 import { NavLink } from "react-router-dom";
 import { Button } from "./styles/Button";
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const Cart = () => {
   const { cart,clearCart,shipping_fee, total_price,total_item } = useCartContext();
-
+  const { isAuthenticated, user } = useAuth0();
+console.log("cart",user)
   if (cart.length === 0) {
     return (
       <Wrapper>
@@ -29,6 +30,12 @@ const Cart = () => {
   return (
     <Wrapper>
       <div className="container">
+      {
+        isAuthenticated &&  (<div className=" cart-user--profile">
+        <img src={user.profile} alt={user.name}/>
+        <h2 className="cart-user--name">{user.name}</h2>
+        </div>
+      )}
         <div className="cart_heading grid grid-five-column">
           <p>Item</p>
           <p className="cart-hide">Price</p>
@@ -63,7 +70,7 @@ const Cart = () => {
          
             <div>
               <p>Total Amount:</p>
-              <p> {(total_price).toFixed(2)} </p>
+              <p> {total_price.toFixed(2)} </p>
             </div>
 
             <div>
@@ -229,6 +236,26 @@ const Wrapper = styled.section`
       color: ${({ theme }) => theme.colors.heading};
     }
   }
+    .cart-user--profile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 5.4rem;
+
+    img {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+    }
+    h2 {
+      font-size: 2.4rem;
+    }
+  }
+  .cart-user--name {
+    text-transform: capitalize;
+  }
+  
   
   
     `;
