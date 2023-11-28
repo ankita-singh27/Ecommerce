@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Cart = () => {
   const { cart,clearCart,shipping_fee, total_price,total_item } = useCartContext();
   const { isAuthenticated, user } = useAuth0();
-console.log("cart",user)
+
   if (cart.length === 0) {
     return (
       <Wrapper>
@@ -32,7 +32,7 @@ console.log("cart",user)
       <div className="container">
       {
         isAuthenticated &&  (<div className=" cart-user--profile">
-        <img src={user.profile} alt={user.name}/>
+        <img src={user.picture} alt={user.name}/>
         <h2 className="cart-user--name">{user.name}</h2>
         </div>
       )}

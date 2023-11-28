@@ -4,32 +4,30 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { Auth0Provider } from "@auth0/auth0-react";
 import { AppProvider } from "./context/productcontext";
 import { CartProvider } from "./context/cart_context";
-import { Auth0Provider } from '@auth0/auth0-react';
-//import { useAuth0 } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const domain=process.env.REACT_APP_AUTH_DOMAIN;
-const clientId=process.env.REACT_APP_CLIENT_ID;
+const domain = process.env.REACT_APP_AUTH_DOMAIN;
+const clientId = process.env.REACT_APP_CLIENT_ID;
 root.render(
   <Auth0Provider
     domain={domain}
     clientId={clientId}
-    //redirectUri={window.location.origin}
+    redirectUri={window.location.origin}
     authorizationParams={{
-      redirect_uri: window.location.origin
+      redirect_uri: window.location.origin,
     }}
-  
   >
-  <AppProvider>
-    <CartProvider>
+    <AppProvider>
+      <CartProvider>
         <App />
-        <ToastContainer/>
+        <ToastContainer />
       </CartProvider>
-  </AppProvider>
+    </AppProvider>
   </Auth0Provider>
 );
 
