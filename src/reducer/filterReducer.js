@@ -1,10 +1,11 @@
 const filterReducer = (state, action) => {
 
     switch (action.type) {
-      case "LOAD_FILTER_PRODUCTS":
-        
+
+      case "LOAD_FILTER_PRODUCTS": 
       return {
         ...state,
+        loading:false,
         filter_products: [...action.payload],
         all_products: [...action.payload],
       };

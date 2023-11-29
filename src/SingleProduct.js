@@ -9,6 +9,7 @@ import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import Star from "./components/Star";
 import AddToCart from "./components/AddToCart";
 import Spinner from "./components/Spinner";
+import FormatPrice from "./Helpers/FormatPrice";
 
 const API = "https://productdecisiveduck.onrender.com/products";
 
@@ -55,10 +56,10 @@ const SingleProduct = () => {
 
             <p className="product-data-price">
               MRP:
-              <del> {price + 250}</del> 
+              <del> <FormatPrice price={price + 250} /></del> 
             </p>
             <p className="product-data-price product-data-real-price">
-              Deal of the Day: {price}
+              Deal of the Day: {<FormatPrice price = {price}/>}
             </p>
             <p>{description}</p>
             <div className="product-data-warranty">

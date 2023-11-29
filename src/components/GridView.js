@@ -1,13 +1,13 @@
 import React, {useState }from "react";
 import styled from "styled-components";
 import Product from "./Product";
-import { useProductContext } from "../context/productcontext";
+import { useFilterContext } from "../context/filter_context";
 import Spinner from "./Spinner";
 
 const GridView = ({ products }) => {
-   const {isLoading}=useProductContext;
+   const {loading}=useFilterContext();
 
-    if (isLoading) {
+    if (loading) {
         return <Spinner/>
         
       }

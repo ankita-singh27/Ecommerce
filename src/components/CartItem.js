@@ -3,6 +3,7 @@ import React from "react";
 import { FaTrash } from "react-icons/fa";
 import { useCartContext } from "../context/cart_context";
 import CartAmountToggle from "./CartAmountToggle";
+import FormatPrice from "../Helpers/FormatPrice";
 
 const CartItem = ({ id, title, image, price, amount }) => {
   const { removeItem,setDecrease,setIncrease } = useCartContext();
@@ -20,7 +21,7 @@ const CartItem = ({ id, title, image, price, amount }) => {
 
       {/* price   */}
       <div className="cart-hide">
-        <p> {price} </p>
+        <p><FormatPrice price= {price} /> </p>
       </div>
 
       {/* Quantity  */}
@@ -33,7 +34,7 @@ const CartItem = ({ id, title, image, price, amount }) => {
 
       {/* //Subtotal */}
       <div className="cart-hide">
-         <p>{(price*amount).toFixed(2)}</p> 
+         <p><FormatPrice price={price*amount} /></p> 
       </div>
 
       <div>

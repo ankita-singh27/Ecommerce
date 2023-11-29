@@ -66,7 +66,6 @@ const cartReducer = (state, action) => {
     case "SET_DECREMENT":
       let updatedProduct = state.cart.map((curElem) => {
         if (curElem.id === action.payload) {
-          console.log(curElem);
           let decAmount = curElem.amount - 1;
 
           if (decAmount <= 1) {

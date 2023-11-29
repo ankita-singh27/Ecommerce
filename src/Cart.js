@@ -4,6 +4,7 @@ import CartItem from "./components/CartItem";
 import { NavLink } from "react-router-dom";
 import { Button } from "./styles/Button";
 import { useAuth0 } from "@auth0/auth0-react";
+import FormatPrice from "./Helpers/FormatPrice";
 
 
 const Cart = () => {
@@ -70,7 +71,7 @@ const Cart = () => {
          
             <div>
               <p>Total Amount:</p>
-              <p> {total_price.toFixed(2)} </p>
+              <p>  <FormatPrice price={total_price}/> </p>
             </div>
 
             <div>
@@ -81,13 +82,13 @@ const Cart = () => {
             
             <div>
               <p>shipping fee:</p>
-              <p> {shipping_fee} </p>
+              <p> <FormatPrice price= {shipping_fee}/> </p>
             </div>
             <hr />
 
             <div>
               <p>order total:</p>
-              <p> {(shipping_fee + total_price).toFixed(2)} </p>
+              <p>  <FormatPrice price ={shipping_fee + total_price}/> </p>
             </div>
           </div>
         </div>
@@ -255,8 +256,36 @@ const Wrapper = styled.section`
   .cart-user--name {
     text-transform: capitalize;
   }
-  
-  
-  
+
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    .grid-five-column {
+      grid-template-columns: 1.5fr 1fr 0.5fr;
+    }
+    .cart-hide {
+      display: none;
+    }
+
+    .cart-two-button {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 2.2rem;
+    }
+
+    .order-total--amount {
+      width: 100%;
+      text-transform: capitalize;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      .order-total--subdata {
+        width: 100%;
+        border: 0.1rem solid #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.8rem;
+        padding: 3.2rem;
+      }
+    }
     `;
 export default Cart;
