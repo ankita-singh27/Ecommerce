@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { BsFillGridFill, BsList } from "react-icons/bs";
-import { useProductContext } from "../context/productcontext";
+import { useFilterContext } from "../context/filter_context";
 
 const Sort = () => {
-  const { filter_products, grid_view, setGridView, setListView } =
-    useProductContext();
+  const { filter_products, grid_view, setGridView, setListView ,sorting} =
+    useFilterContext();
   return (
     <Wrapper className="sort-section">
       {/* 1st column  */}
@@ -29,7 +29,7 @@ const Sort = () => {
 
       {/* 3rd column  */}
       <div className="sort-selection">
-        {/* <form action="#">
+        <form action="#">
           <label htmlFor="sort"></label>
           <select
             name="sort"
@@ -44,7 +44,7 @@ const Sort = () => {
             <option value="#" disabled></option>
             <option value="z-a">Price(z-a)</option>
           </select>
-        </form> */}
+        </form>
       </div>
     </Wrapper>
   );
@@ -77,17 +77,10 @@ const Wrapper = styled.section`
     }
   }
 
-  ${'' /* .sort-selection .sort-selection--style {
+  .sort-selection .sort-selection--style {
     padding: 0.5rem;
     cursor: pointer;
-
-    .sort-select--option {
-      padding: 0.5rem 0;
-      cursor: pointer;
-      height: 2rem;
-      padding: 10px;
-    }
-  } */}
+  }
 `;
 
 export default Sort;

@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { AppProvider } from "./context/productcontext";
 import { CartProvider } from "./context/cart_context";
+import { FilterContextProvider } from "./context/filter_context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -23,10 +24,14 @@ root.render(
     }}
   >
     <AppProvider>
+    <FilterContextProvider>
       <CartProvider>
+      
         <App />
         <ToastContainer />
+        
       </CartProvider>
+      </FilterContextProvider>
     </AppProvider>
   </Auth0Provider>
 );

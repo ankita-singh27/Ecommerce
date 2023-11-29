@@ -12,9 +12,6 @@ const initialState = {
   products: [],
   featureProducts: [],
   singleProduct: {},
-  filter_products:[],
-  all_products:[],
-  grid_view :true,
 };
 
 const AppProvider = ({ children }) => {
@@ -27,8 +24,6 @@ const AppProvider = ({ children }) => {
       const res = await axios.get(url);
       const products = await res.data;
       dispatch({ type: "SET_API_DATA", payload: products });
-      dispatch({ type: "SET_LOADING" });
-      dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products });
       console.log(products)
     } catch (error) {
       console.error(error.message)
@@ -54,19 +49,9 @@ const AppProvider = ({ children }) => {
     getProducts(API);
   }, []);
 
-  //to set the grid view
-   const setGridView = () => {
-    //dispatch({ type: "SET_LOADING" });
-     return dispatch({ type: "SET_GRID_VIEW" });
-   };
-
-   //to set the list view
-   const setListView = () => {
-     return dispatch({ type: "SET_LIST_VIEW" });
-  };
 
   return (
-    <AppContext.Provider value={{ ...state, getSingleProduct,setGridView,setListView  }}>
+    <AppContext.Provider value={{ ...state, getSingleProduct }}>
       {children}
     </AppContext.Provider>
   );

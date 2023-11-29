@@ -10,7 +10,7 @@ const ListView = ({ products }) => {
           const { id, title, image, price, description } = curElem;
 
           return (
-            <div className="card grid grid-two-column">
+            <div className="card grid grid-two-column" key="curElem.id">
               <figure>
                 <img src={image} alt={title} />
               </figure>

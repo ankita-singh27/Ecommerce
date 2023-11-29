@@ -23,7 +23,7 @@ const Wrapper = styled.section`
 
   img{
     padding:0 2rem;
-    position:relative;
+
     &:hover{
       scale:1.03;
       transition: all 0.5s linear;
@@ -41,7 +41,7 @@ const Wrapper = styled.section`
     }
 
     img{
-      width:60%;
+      width:70%;
       margin:3rem;
  
     }
@@ -49,6 +49,7 @@ const Wrapper = styled.section`
       margin-top:3rem;
     }
   }
+
 
 `
 export default Category
