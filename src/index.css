@@ -12,3 +12,8 @@ code {
     monospace;
 }
 
+.toast-message {
+  font-size: 20px;
+  padding: 30px 20px;
+}
+

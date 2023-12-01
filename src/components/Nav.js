@@ -6,13 +6,19 @@ import { CgMenu, CgClose } from "react-icons/cg";
 import { useCartContext } from "../context/cart_context";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "../styles/Button";
+import { toast } from 'react-toastify';
 
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
   const { total_item } = useCartContext();
   const { loginWithRedirect, user, logout, isAuthenticated } = useAuth0();
-  
+  const [showMessage, setShowMessage] = useState(false);
+
+  const showName = () =>{
+    setShowMessage(true);
+  }
   const Nav = styled.nav`
+
     .navbar-lists {
       display: flex;
       gap: 4.8rem;
@@ -37,12 +43,24 @@ const Nav = () => {
       }
     }
 
+
+.user-picture img{
+  border-radius:50%;
+  width: 5rem;
+  height: 5rem;
+  cursor:pointer;
+}
+.user-name{
+  background-color:white;
+}
+
     .mobile-navbar-btn {
       display: none;
       background-color: transparent;
       cursor: pointer;
       border: none;
     }
+    
 
     .mobile-nav-icon[name="close-outline"] {
       display: none;
@@ -76,12 +94,7 @@ const Nav = () => {
       .user-login--name {
         text-transform: capitalize;
       }
-
-      .user-logout,
-      .user-login {
-        font-size: 1.4rem;
-        padding: 0.8rem 1.4rem;
-      }
+      
       .bounce {
         animation: bounceIn 2s infinite 2s;
       }
@@ -217,18 +230,29 @@ const Nav = () => {
               Contact
             </NavLink>
           </li>
-          {isAuthenticated && <p> {user.name} </p>}
+          { isAuthenticated && (<div className="user-picture">
+          <img src={user.picture} alt={user.name} onClick={showName}/>
+          {showMessage && <p className="user-name">Hello, {user.name}</p>}
+          </div>
+          )}
+          
 
           {isAuthenticated ? (
             <li>
               <Button
-                onClick={() =>logout({ logoutParams: { returnTo: window.location.origin } })}>
+                onClick={ () =>{
+                  logout({ logoutParams: { returnTo: window.location.origin } }); 
+                  toast.warning("Logged Out",{className : "toast-message"});
+                  }}>
                 Log Out
               </Button>
             </li>
           ) : (
             <li>
-              <Button onClick={() => loginWithRedirect()}>Log In</Button>;
+              <Button onClick={() =>{
+               loginWithRedirect();
+               }}>
+               Log In </Button>;
             </li>
           )}
 

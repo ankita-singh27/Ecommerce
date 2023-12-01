@@ -11,7 +11,7 @@ const About = () => {
       <div className="grid grid-two-column">
         <div className="about-section-data">
           <p className="intro-data">Welcome to </p>
-          <h1> ECOMZY</h1>
+          <h1> SHOPPER</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
             atque temporibus veniam doloribus libero ad error omnis voluptates

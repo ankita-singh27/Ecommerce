@@ -5,54 +5,75 @@ import { NavLink } from "react-router-dom";
 import { Button } from "./styles/Button";
 import { useAuth0 } from "@auth0/auth0-react";
 import FormatPrice from "./Helpers/FormatPrice";
+import StripeCheckout from "react-stripe-checkout";
+import { useState } from "react";
+import {toast} from 'react-toastify'
 
 
 const Cart = () => {
-  const { cart,clearCart,shipping_fee, total_price,total_item } = useCartContext();
+  const { cart, clearCart, shipping_fee, total_price, total_item } =
+    useCartContext();
   const { isAuthenticated, user } = useAuth0();
+  const [payNow, setPayNow] = useState(false)
 
   if (cart.length === 0) {
     return (
       <Wrapper>
-      <div className="empty-cart ">
-      <div className="bounce"> 
-      <img src="./images/trolley.png" alt="trolley"className=" trolley-cart" />
-      </div>
-       
-        <h3>Your Cart is Empty </h3>
-        <NavLink to="/products">
-        <Button>Shop Now</Button>
-        </NavLink>
-      </div>
+        <div className="empty-cart ">
+          <div className="bounce">
+            <img
+              src="./images/trolley.png"
+              alt="trolley"
+              className=" trolley-cart"
+            />
+          </div>
+
+          <h3>Your Cart is Empty </h3>
+          <NavLink to="/products">
+            <Button>Shop Now</Button>
+          </NavLink>
+        </div>
       </Wrapper>
     );
   }
 
+const handleCheckout = () => {
+if (isAuthenticated){
+setPayNow(true); }
+else{
+toast.error("Please sign in to Checkout", {className : "toast-message"})
+}
+}
+
+//function for stripe checkout
+  const onToken = (token) => {
+    console.log(token);
+    alert("payment Successfull");
+  };
   return (
     <Wrapper>
       <div className="container">
-      {
-        isAuthenticated &&  (<div className=" cart-user--profile">
-        <img src={user.picture} alt={user.name}/>
-        <h2 className="cart-user--name">{user.name}</h2>
-        </div>
-      )}
+        {isAuthenticated && (
+          <div className=" cart-user--profile">
+            <img src={user.picture} alt={user.name} />
+            <h2 className="cart-user--name">{user.name}</h2>
+          </div>
+        )}
         <div className="cart_heading grid grid-five-column">
           <p>Item</p>
           <p className="cart-hide">Price</p>
           <p>Quantity</p>
           <p className="cart-hide">Subtotal</p>
           <p>Remove</p>
-          </div>
-          <hr />
-         
-        
+        </div>
+        <hr />
+
         <div className="cart-item">
           {cart.map((curElem) => {
             return <CartItem key={curElem.id} {...curElem} />;
           })}
         </div>
-        <hr/>
+        <hr />
 
         {/* clear button and continue button */}
         <div className="cart-two-button">
@@ -66,37 +87,54 @@ const Cart = () => {
 
         {/* order total_amount */}
         <div className="order-total--amount">
-        <div><p className="summary"> Order Summary</p></div>
+          <div> <p className="summary"> Order Summary</p> </div>
+          
           <div className="order-total--subdata">
-         
             <div>
               <p>Total Amount:</p>
-              <p>  <FormatPrice price={total_price}/> </p>
+              <p> <FormatPrice price={total_price} /> </p>
             </div>
 
             <div>
               <p>Quantity:</p>
               <p> {total_item} </p>
             </div>
-            
-            
+
             <div>
               <p>shipping fee:</p>
-              <p> <FormatPrice price= {shipping_fee}/> </p>
+              <p> <FormatPrice price={shipping_fee} /> </p>
             </div>
             <hr />
 
             <div>
               <p>order total:</p>
-              <p>  <FormatPrice price ={shipping_fee + total_price}/> </p>
+              <p><FormatPrice price={shipping_fee + total_price} /> </p>
             </div>
+
+            <Button onClick={handleCheckout}>Checkout</Button>
+
+            {/* Stripe checkout payment */}
+
+            {payNow && 
+            (<div style={{ display: "flex", justifyContent: "center" }}>
+              <StripeCheckout
+                token={onToken}
+                name="Shopper Online Shopping"
+                currency="INR"
+                amount={total_price * 100}
+                email={user.email}
+                //allowRememberMe="false"
+                label="Buy Now"
+                description={`Your Payment Amount is ${total_price}`}
+                stripeKey="pk_test_51OI6ZkSIRMFawo6lb2PuS5xLhKA9FOsm77kJvjKwj67zgbDPCfMzpIp9c8W6W03yItkZh64n8nGJTmDgTrmWsf7z004REcR5Gx"
+              />
+            </div>)}
           </div>
         </div>
       </div>
     </Wrapper>
   );
 };
-
 
 const Wrapper = styled.section`
   padding: 9rem 0;
@@ -190,7 +228,7 @@ const Wrapper = styled.section`
     cursor: pointer;
   }
 
-  ${'' /* clear and continue button.cart-two-button { */}
+  ${"" /* clear and continue button.cart-two-button { */}
   .cart-two-button{
     margin-top: 2rem;
     display: flex;

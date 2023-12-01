@@ -18,7 +18,7 @@ const initialState = {
   cart:getLocalCartData(),
   total_item: "",
   total_price: "",
-  shipping_fee: 100,
+  shipping_fee: 0,
 };
 
 const CartProvider = ({ children }) => {
@@ -26,12 +26,16 @@ const CartProvider = ({ children }) => {
 
   const addToCart = ( amount, product) => {
     dispatch({ type: "ADD_TO_CART", payload: { amount, product } });
-    toast.success("Added To Cart");
+    toast.success("Added To Cart",{
+      className: "toast-message",
+    });
   };
 
   const removeItem = (id) => {
     dispatch({ type: "REMOVE_ITEM", payload: id });
-    toast.warning("Removed From Cart");
+    toast.warning("Removed From Cart",{
+      className: "toast-message",
+    });
   };
 
   // to clear the cart

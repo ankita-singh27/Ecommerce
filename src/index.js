@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { AppProvider } from "./context/productcontext";
@@ -26,10 +26,8 @@ root.render(
     <AppProvider>
     <FilterContextProvider>
       <CartProvider>
-      
         <App />
         <ToastContainer />
-        
       </CartProvider>
       </FilterContextProvider>
     </AppProvider>

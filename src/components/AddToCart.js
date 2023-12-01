@@ -28,10 +28,7 @@ const AddToCart = ({ product }) => {
         setIncrease={setIncrease}
         />
     
-      <NavLink to="/cart">
         <Button className="btn" onClick={()=>addToCart(amount,product)}>Add To Cart</Button>
-      </NavLink>
-      
     </Wrapper>
   );
 };
