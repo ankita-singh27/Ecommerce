@@ -26,14 +26,14 @@ const CartProvider = ({ children }) => {
 
   const addToCart = ( amount, product) => {
     dispatch({ type: "ADD_TO_CART", payload: { amount, product } });
-    toast.success("Added To Cart",{
+    toast.success(" Item Added To Cart",{
       className: "toast-message",
     });
   };
 
   const removeItem = (id) => {
     dispatch({ type: "REMOVE_ITEM", payload: id });
-    toast.warning("Removed From Cart",{
+    toast.success(" Item Removed From Cart",{
       className: "toast-message",
     });
   };

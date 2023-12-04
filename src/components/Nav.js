@@ -242,7 +242,7 @@ const Nav = () => {
               <Button
                 onClick={ () =>{
                   logout({ logoutParams: { returnTo: window.location.origin } }); 
-                  toast.warning("Logged Out",{className : "toast-message"});
+                  toast.success("Logged Out",{className : "toast-message"});
                   }}>
                 Log Out
               </Button>
