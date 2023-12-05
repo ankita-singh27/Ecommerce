@@ -1,13 +1,13 @@
 import React from 'react'
 import { useFilterContext } from '../context/filter_context';
 import styled from 'styled-components';
-
+import FormatPrice from "../Helpers/FormatPrice"
 
 const FilterSection = () => {
 
   const {
     all_products,updateFilterValue,
-    filters: { text, category },
+    filters: { text, category,price, maxPrice, minPrice },
   } = useFilterContext();
   
 // get the unique values of category
@@ -53,6 +53,26 @@ const categoryData = getUniqueData(all_products);
               </button>
             );
           })}
+        </div>
+      </div>
+
+      <div className="filter_price">
+        <h3>Price</h3>
+        <div className='filter-min-max-price'>
+        <p>
+          <FormatPrice price={minPrice} />
+        </p>
+        <input
+          type="range"
+          name="price"
+          min={minPrice}
+          max={maxPrice}
+          value={price}
+          onChange={updateFilterValue}
+        />
+        <p>
+          <FormatPrice price={price} />
+        </p>
         </div>
       </div>
 
@@ -103,7 +123,20 @@ const Wrapper = styled.section`
     }
   }
 
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+.filter_price {
+    input {
+      margin: 0.5rem 0 1rem 0;
+      padding: 0;
+      box-shadow: none;
+      cursor: pointer;
+    }
+  .filter-min-max-price{
+    display:flex;
+    align-items:center;
+  }
+}
+
+  @media (max-width: ${({ theme }) => theme.media.tab}) {
 
     .filter-category {
     div {
@@ -113,6 +146,6 @@ const Wrapper = styled.section`
       gap: 1.4rem;
     }
   }
-
+  }
 `;
 export default FilterSection

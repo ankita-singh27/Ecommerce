@@ -13,6 +13,9 @@ const initialState = {
     filters: {
       text: "",
       category: "all",
+      maxPrice: 0,
+      price: 0,
+      minPrice: 0,
     },
 }
     
