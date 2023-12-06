@@ -1,4 +1,4 @@
-import React, {useState }from "react";
+import React from "react";
 import styled from "styled-components";
 import Product from "./Product";
 import { useFilterContext } from "../context/filter_context";

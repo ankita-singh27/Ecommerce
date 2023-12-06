@@ -60,7 +60,7 @@ const FilterSection = () => {
       </div>
 
       <div className="filter_price">
-        <h3>Filter By Price</h3>
+        <h3>Filter By Price</h3><br/>
         <div className="filter-min-max-price">
           <p>
           <FormatPrice price={minPrice} />

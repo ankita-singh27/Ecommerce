@@ -28,7 +28,7 @@ const About = () => {
           <figure>
             <img
               src="images/hero.jpg"
-              alt="about-section-photo"
+              alt="about-section"
               className="img-style"
             />
           </figure>

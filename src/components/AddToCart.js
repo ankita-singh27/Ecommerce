@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
 import { Button } from "../styles/Button";
 import { useCartContext } from "../context/cart_context";
 import CartAmountToggle from "./CartAmountToggle";
