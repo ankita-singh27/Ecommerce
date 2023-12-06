@@ -32,6 +32,7 @@ const Footer = () => {
             </div>
 
             <div className="footer-terms">
+            <p> Categories</p><br/>
               <p>PRIVACY POLICY</p>
               <br />
               <p>TERMS & CONDITIONS</p>
@@ -54,7 +55,7 @@ const Footer = () => {
 
             <div className="footer-contact">
               <h3>Call Us</h3>
-              <h3>+91 12345678978</h3>
+              <h3>+91 1234567897</h3>
             </div>
           </div>
 
@@ -130,6 +131,7 @@ const Wrapper = styled.section`
     }
   }
 
+  
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
     .contact-short {
       max-width: 80vw;

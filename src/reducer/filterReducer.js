@@ -117,6 +117,19 @@ const filterReducer = (state, action) => {
         filter_products: tempFilterProduct,
       };
 
+      case "CLEAR_FILTERS":
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          text: "",
+          category: "all",
+          // maxPrice: 0,
+          price: state.filters.maxPrice,
+          minPrice: 0,
+        },
+      };
+
     default:
       return state;
   }

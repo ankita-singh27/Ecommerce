@@ -9,7 +9,7 @@ const initialState = {
     filter_products: [],
     all_products: [],
     grid_view: true,
-    sorting_value: "lowest",
+    sorting_value: "",
     filters: {
       text: "",
       category: "all",
@@ -56,6 +56,12 @@ useEffect(() => {
     return dispatch({ type: "UPDATE_FILTERS_VALUE", payload: { name, value } });
   };
 
+
+  // to clear the filter
+  const clearFilters = () => {
+    dispatch({ type: "CLEAR_FILTERS" });
+  };
+
   // to sort the product
   useEffect(() => {
     dispatch({ type: "FILTER_PRODUCTS" });
@@ -63,7 +69,8 @@ useEffect(() => {
   }, [state.sorting_value,state.filters]);
     return (
         
-            <FilterContext.Provider value={{ ...state,setGridView,setListView,sorting,updateFilterValue}}>
+            <FilterContext.Provider
+             value={{ ...state,setGridView,setListView,sorting,updateFilterValue,clearFilters}}>
               {children}
             </FilterContext.Provider>
           );

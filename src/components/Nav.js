@@ -230,13 +230,7 @@ const Nav = () => {
               Contact
             </NavLink>
           </li>
-          { isAuthenticated && (<div className="user-picture">
-          <img src={user.picture} alt={user.name} onClick={showName}/>
-          {showMessage && <p className="user-name">Hello, {user.name}</p>}
-          </div>
-          )}
           
-
           {isAuthenticated ? (
             <li>
               <Button
@@ -262,6 +256,12 @@ const Nav = () => {
               <span className="cart-total--item bounce"> {total_item} </span>
             </NavLink>
           </li>
+
+          { isAuthenticated && (<div className="user-picture">
+          <img src={user.picture} alt={user.name} onClick={showName}/>
+          {showMessage && <p className="user-name">Hello, {user.name}</p>}
+          </div>
+          )}
         </ul>
 
         {/* two button for open and close of menu */}

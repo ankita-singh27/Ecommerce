@@ -123,7 +123,7 @@ toast.error("Please sign in to Checkout", {className : "toast-message"})
                 currency="INR"
                 amount={total_price * 100}
                 email={user.email}
-                label="Buy Now"
+                label="Pay To Shopper"
                 description={`Your Payment Amount is ${total_price}`}
                 stripeKey="pk_test_51OI6ZkSIRMFawo6lb2PuS5xLhKA9FOsm77kJvjKwj67zgbDPCfMzpIp9c8W6W03yItkZh64n8nGJTmDgTrmWsf7z004REcR5Gx"
               />
