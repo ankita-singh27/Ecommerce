@@ -7,7 +7,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import FormatPrice from "./Helpers/FormatPrice";
 import StripeCheckout from "react-stripe-checkout";
 import { useState } from "react";
-import {toast} from 'react-toastify'
+import {toast} from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 
 const Cart = () => {
@@ -15,6 +16,7 @@ const Cart = () => {
     useCartContext();
   const { isAuthenticated, user } = useAuth0();
   const [payNow, setPayNow] = useState(false)
+  const navigate = useNavigate();
 
   if (cart.length === 0) {
     return (
@@ -49,7 +51,9 @@ toast.error("Please sign in to Checkout", {className : "toast-message"})
   const onToken = (token) => {
     console.log(token);
     alert("Your Item has been placed successfully");
+    navigate('/products')
   };
+
   return (
     <Wrapper>
       <div className="container">
@@ -124,10 +128,13 @@ toast.error("Please sign in to Checkout", {className : "toast-message"})
                 amount={total_price * 100}
                 email={user.email}
                 label="Pay To Shopper"
-                description={`Your Payment Amount is ${total_price}`}
+                billingAddress
+                description="Please fill  the details below"
                 stripeKey="pk_test_51OI6ZkSIRMFawo6lb2PuS5xLhKA9FOsm77kJvjKwj67zgbDPCfMzpIp9c8W6W03yItkZh64n8nGJTmDgTrmWsf7z004REcR5Gx"
-              />
+              >
+              </StripeCheckout>
             </div>)}
+            
           </div>
         </div>
       </div>

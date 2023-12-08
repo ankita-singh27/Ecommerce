@@ -31,7 +31,6 @@ const Home = () => {
       <img src="./images/banner-img.png" alt="banner" style={{width:"100%",height:"50rem"}}/>
       <img src="./images/banner1.jpg" alt="banner" style={{width:"100%" ,height:"50rem"}}/>
       </Carousel>
-      
       <Category/>
       <FeatureProduct />
       <TopProducts/>
