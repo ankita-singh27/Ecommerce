@@ -42,7 +42,7 @@ const AddToCart = ({ product }) => {
 const Wrapper = styled.section`
   /* we can use it as a global one too  */
   .cart-button{
-    width:18rem;
+    width:16rem;
   }
   .amount-toggle {
     margin-top: 3rem;
@@ -65,11 +65,14 @@ const Wrapper = styled.section`
   }
   .cart--button{
     display:flex;
-    ${'' /* background-color:red; */}
     justify-content: space-between;
-    ${'' /* align-items:space-around; */}
-    ${'' /* height:10rem; */}
     width:40rem;
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    .cart--button{
+    width:35rem;
+  }
   }
 `;
 export default AddToCart;
