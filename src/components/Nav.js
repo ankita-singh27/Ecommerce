@@ -250,12 +250,14 @@ const Nav = () => {
             </li>
           )}
 
+         
           <li>
             <NavLink to="/cart" className="navbar-link cart-trolley--link">
               <FiShoppingCart className="cart-trolley" onClick={() => setMenuIcon(false)} />
               <span className="cart-total--item bounce"> {total_item} </span>
             </NavLink>
           </li>
+
 
           { isAuthenticated && (<div className="user-picture">
           <img src={user.picture} alt={user.name} onClick={showName}/>

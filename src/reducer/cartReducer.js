@@ -44,8 +44,6 @@ const cartReducer = (state, action) => {
         ...state,
         cart: [...state.cart, cartProduct],
       };
-    
-  
 
     case "REMOVE_ITEM":
       let updatedCart = state.cart.filter(

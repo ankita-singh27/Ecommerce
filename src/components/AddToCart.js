@@ -31,8 +31,9 @@ const AddToCart = ({ product }) => {
         <Button className="btn" onClick={() => addToCart(amount, product)}>
           Add To Cart
         </Button>
+
         <NavLink to="/cart">
-          <Button>Go To Cart</Button>
+          <Button className="btn">Go To Cart</Button>
         </NavLink>
       </div>
     </Wrapper>

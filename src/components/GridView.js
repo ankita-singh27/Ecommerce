@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Product from "./Product";
 import { useFilterContext } from "../context/filter_context";
@@ -6,59 +6,23 @@ import Spinner from "./Spinner";
 
 const GridView = ({ products }) => {
   const { loading } = useFilterContext();
-  const [page, setPage] = useState(1);
 
   if (loading) {
     return <Spinner />;
   }
-  const selectPageHandler = (selectedPage) => {
-    if (
-      selectedPage >= 1 &&
-      selectedPage <= products.length / 10 &&
-      selectedPage !== page
-    ) {
-      setPage(selectedPage);
-    }
-  };
 
+ 
   return (
     <Wrapper className="section">
       {products.length > 0 && (
         <div className="container grid grid-three-column">
-          {products.slice(page * 10 - 10, page * 10).map((curElem) => {
+          {products.map((curElem) => {
             return <Product key={curElem.id} {...curElem} />;
           })}
         </div>
       )}
-      {products.length > 0 && (
-        <div className="pagination">
-          <span
-            onClick={() => selectPageHandler(page - 1)}
-            className={page > 1 ? "" : "pagination__disable"}
-          >
-            ◀
-          </span>
-
-          {[...Array(products.length / 10)].map((_, i) => {
-            return (
-              <span
-                key={i}
-                className={page === i + 1 ? "pagination__selected" : ""}
-                onClick={() => selectPageHandler(i + 1)}
-              >
-                {i + 1}
-              </span>
-            );
-          })}
-
-          <span
-            onClick={() => selectPageHandler(page + 1)}
-            className={page < products.length / 10 ? "" : "pagination__disable"}
-          >
-            ▶
-          </span>
-        </div>
-      )}
+      
+      
     </Wrapper>
   );
 };
@@ -175,7 +139,7 @@ const Wrapper = styled.section`
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
     .pagination {
     padding: 1px;
-    margin: 1px 0;
+    margin: 5px 0;
     }
   }
 `;
